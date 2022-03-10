@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupay | Add Funding Source</title>
+    <script src="https://widget.sandbox.v3api.machpay.com/widget/widget.js" charset="utf-8"></script>
+    <style>
+        #widget-iframe {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body style="height:auto;">
+    <div id="widget-root"> </div>
+</body>
+<script>
+    const params = window.location.search.substr(1)
+    const dividedIntoParams = params.split('&')
+    let token,type,senderId
+    dividedIntoParams.forEach((param)=>{
+        if(param.split('=')[0] === "token"){
+            token = param.split('=')[1]
+        }
+
+        if(param.split('=')[0] === "type"){
+            type = param.split('=')[1]
+        }
+
+        if(param.split('=')[0] === "senderId"){
+            senderId = param.split('=')[1]
+        }
+    })
+
+    var widget = new MachnetWidget({
+      elementId: "widget-root",
+      senderId,
+      width: "100%",
+      height: "200px",
+      type,
+      locale: "en",
+      multiStep: true,
+      token
+    });
+    widget.init();
+  </script>
+</html>
